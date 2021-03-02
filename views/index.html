@@ -4,30 +4,54 @@
   <head>
     <title>URL Shortener</title>
     <link rel="icon" type="image/png" href="../public/favicon.ico" />
-    <link href="./public/style.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="../public/style.css" rel="stylesheet" type="text/css" /> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
 
   <body>
-    <h1>URL Shortener Microservice</h1>
-    <main>
-      <section>
-        <form action="api/shorturl/new" method="POST">
-          <fieldset>
-            <legend>URL Shortener</legend>
-            <label for="url_input">URL:</label>
-            <input
-              id="url_input"
-              type="text"
-              name="url"
-              placeholder="https://www.freecodecamp.org/"
-            />
-            <input type="submit" value="POST URL" />
-          </fieldset>
-        </form>
-      </section>
-    </main>
-    <footer>
-      <p>By <a href="https://www.freecodecamp.org/">freeCodeCamp</a></p>
-    </footer>
+    <div class="container">
+      <h1>URL Shortener Microservice</h1>
+      <main>
+        <section>
+          <form action="api/shorturl" method="POST" class="my-4 form-inline">
+            <fieldset>
+              <legend>URL Shortener</legend>
+              <label for="url_input" class="sr-only">URL:</label>
+              <input
+                required
+                class="form-control mr-2"
+                id="url_input"
+                type="url"
+                name="url"
+                placeholder="Enter URL"
+              />
+              <button class="btn btn-success" type="submit">POST URL</button>
+            </fieldset>
+          </form>
+        </section>
+        <table class="table table-striped table-responsive">
+          <thead>
+            <tr>
+              <th>Full URL</th>
+              <th>Short URL</th>
+              <th>clicks</th>
+              <th>Created date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="http://ynet.co.il">http://ynet.co.il</a></td>
+              <td><a href="/123456">123456</a></td>
+              <td>0</td>
+              <td>12/05/2021</td>
+            </tr>
+          </tbody>
+        </table>
+      </main>
+      <footer>
+        <p>By <a href="https://www.freecodecamp.org/">freeCodeCamp</a></p>
+      </footer>
+    </div>
+    <script src="../index.js"></script>
   </body>
 </html>
