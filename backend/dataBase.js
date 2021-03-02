@@ -16,7 +16,6 @@ class DataBase {
           let parseData = JSON.parse(data);
           this.urls = parseData.links;
     }
-
     static async addUrlToFile(reqBody) { 
         await this.readAllData();
         let fullUrlRequest = {
@@ -25,18 +24,31 @@ class DataBase {
             originalUrl: reqBody.url,
             shortUrl: shortId.generate()  
         };
-        
         this.urls.push(fullUrlRequest);
-        // items.links.push(this.urls)
         let json = JSON.stringify({"links": this.urls})
-
-        // let urlString = JSON.stringify(this.urls)
-        // let urlsJson = {"links": urlString};
-
         fs.writeFile(`backend/data.json`, json)
     }
-
-
+    static async getOriginalUrl(id) {
+        await this.readAllData();
+        for(let item of this.urls) {
+            if(id === item.shortUrl) {
+                item.redirectCount += 1;
+                let json = JSON.stringify({"links": this.urls})
+                fs.writeFile(`backend/data.json`, json)
+                return item.originalUrl;
+            }
+        }
+        return null;  
+    }
+    static async getAllItemData(id) {
+        await this.readAllData();
+        for(let item of this.urls) {
+            if(id === item.shortUrl) {
+                return item;
+            }
+        }
+        return null;
+    }
 }
 
 
