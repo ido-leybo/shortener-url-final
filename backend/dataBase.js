@@ -18,6 +18,11 @@ class DataBase {
     }
     static async addUrlToFile(reqBody) { 
         await this.readAllData();
+        for(let item of this.urls) {
+            if(item.originalUrl === reqBody.url) {
+                return item.shortUrl;
+            }
+        }
         let fullUrlRequest = {
             creationDate: Date.now(),
             redirectCount: 0,
@@ -26,7 +31,8 @@ class DataBase {
         };
         this.urls.push(fullUrlRequest);
         let json = JSON.stringify({"links": this.urls})
-        fs.writeFile(`backend/data.json`, json)
+        fs.writeFile(`backend/data.json`, json);
+        return fullUrlRequest.shortUrl;
     }
     static async getOriginalUrl(id) {
         await this.readAllData();
@@ -50,7 +56,6 @@ class DataBase {
         return null;
     }
 }
-
 
 
 module.exports = DataBase;
