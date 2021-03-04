@@ -1,13 +1,15 @@
 html
   head
-  <link rel="stylesheet", href="../public/style.css">
-  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet", href="../public/style.css">
+    <link rel="icon" type="image/png" href="../public/favicon.ico" />
     title= title
-  body(id="body")
+  body
     h1(id="header")= message
     div  
-      input(id="url_input" type='url' value=id autofocus)
+      input(id="url_input" class="form-control mr-2" type='url' value=id autofocus)
       button(onclick="myFunction()" id="copy-button" value="copy" name="copy") copy
+      footer by ido leybovitch <img id="icon" width="30px" src="../public/favicon.ico">  
       script.
         function myFunction() {
           let copyUrl = document.getElementById("url_input");

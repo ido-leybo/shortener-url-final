@@ -11,16 +11,6 @@ app.use(cors());
 app.use("/public", express.static(`./public`));
 app.use(express.urlencoded({extended: false}));
 
-// Check if url is valid
-// function isValidURL(req, res, next) {
-//   console.timeLog(req.body.url)
-//   res = (req.body.url).match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-//   if(res !== null){
-//     next()
-//   } else {
-//     return res.status(400)
-//   }
-// };
 
 app.get("/", (req, res) => {
   res.render('index')

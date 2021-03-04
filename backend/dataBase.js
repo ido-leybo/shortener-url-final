@@ -19,16 +19,18 @@ class DataBase {
     }
     static async addUrlToFile(reqBody) { 
         await this.readAllData();
+
+        // Check if url legal
         if(!isUrl(reqBody.url)) {
-            console.log("ido")
             return null;
         }
-        console.log("leybo")
+        
         for(let item of this.urls) {
             if(item.originalUrl === reqBody.url) {
                 return item.shortUrl;
             }
         }
+        // create new item
         let fullUrlRequest = {
             creationDate: this.getCurrentDate(new Date()),
             redirectCount: 0,

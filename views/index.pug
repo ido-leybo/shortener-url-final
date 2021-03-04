@@ -1,23 +1,20 @@
-<!DOCTYPE html>
-
-<html>
-  <head>
-    <title>URL Shortener</title>
-    <link rel="icon" type="image/png" href="../public/favicon.ico" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-
-  <body style="background: rgb(216, 199, 123)">
-    <div class="container">
-      <h1>URL Shortener Microservice</h1>
-      <main>
-        <section>
-          <form action="api/shorturl" method="POST" class="my-4 form-inline">
-            <fieldset>
-              <legend>URL Shortener</legend>
-              <label for="url_input" class="sr-only">URL:</label>
-              <input required class="form-control mr-2" id="url_input" type="url" name="url" placeholder="Enter URL"/>
-              <button class="btn btn-success" type="submit">POST URL</button>
+html
+  head
+    title URL Shortener
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+    link(rel="stylesheet", href="../public/style.css")
+    link(rel="icon" type="image/png" href="../public/favicon.ico")
+  body(style="background: rgb(216, 199, 123)")
+    div(class="container")
+      h1 URL Shortener Microservice
+      main
+        section
+          form(action="api/shorturl" method="POST" class="my-4 form-inline")
+            fieldset
+              legend <img width="40px" src="../public/favicon.ico">  URL Shortener
+              label(for="url_input" class="sr-only") URL:
+              input(required class="form-control mr-2" id="url_input" type="url" name="url" placeholder="Enter URL")
+              button(class="btn btn-success" type="submit") POST URL
             </fieldset>
           </form>
         </section>

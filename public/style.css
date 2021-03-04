@@ -8,18 +8,39 @@ body {
   align-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100vw;
+  height: 100vh;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  width: 100vw;
+  height: 100vh;
 }
 
 main {
   padding: 0;
   margin-top: 40px;
 }
-
+#url_input {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 40vw;
+}
 h3 {
   margin-top: 30px;
 }
+footer {
+  margin-top: 30px;
+}
 #copy-button {
-  background-color: rgb(92, 68, 17);
+  background-color: rgb(28, 121, 57);
   font-size: 20px;
   font-weight: bold;
   color: #fff;
@@ -28,18 +49,18 @@ h3 {
   border-radius: 50%;
 }
 #header {
-  background-color: rgb(58, 28, 28);
+  background-color: rgb(34, 146, 72);
   color: #fff;
-  width: 400px;
-  height: 60px;
+  width: 35vw;
+  height: 80px;
   padding: 4px;
-  padding-top: 30px;
+  padding-top: 10px;
   border-radius: 50%;
 }
 
-.user-stories li {
+/* .user-stories li {
   margin-bottom: 1em;
-}
+} */
 
 a {
   color: #2574a9;
@@ -53,14 +74,4 @@ form {
 
 label {
   margin-right: 10px;
-}
-
-input {
-  padding: 5px;
-  margin: 8px;
-}
-
-input[type='text'] {
-  width: 400px;
-  text-align: center;
 }
