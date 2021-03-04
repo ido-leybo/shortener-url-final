@@ -2,10 +2,12 @@ body {
   font-family: Arial, sans-serif;
   font-size: 16px;
   color: #222;
-  background-color: rgb(40, 155, 101);
+  background-color: rgb(216, 199, 123);
   text-align: center;
   line-height: 1.4em;
-  
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
@@ -16,8 +18,24 @@ main {
 h3 {
   margin-top: 30px;
 }
-
-
+#copy-button {
+  background-color: rgb(92, 68, 17);
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  width: 100px;
+  height: 40px;
+  border-radius: 50%;
+}
+#header {
+  background-color: rgb(58, 28, 28);
+  color: #fff;
+  width: 400px;
+  height: 60px;
+  padding: 4px;
+  padding-top: 30px;
+  border-radius: 50%;
+}
 
 .user-stories li {
   margin-bottom: 1em;
@@ -39,9 +57,10 @@ label {
 
 input {
   padding: 5px;
+  margin: 8px;
 }
 
 input[type='text'] {
-  width: 220px;
+  width: 400px;
   text-align: center;
 }

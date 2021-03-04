@@ -1,7 +1,18 @@
 html
   head
   <link rel="stylesheet", href="../public/style.css">
+  
     title= title
-  body
-    h1= message 
-    a(href=id) NEW LINK
+  body(id="body")
+    h1(id="header")= message
+    div  
+      input(id="url_input" type='url' value=id autofocus)
+      button(onclick="myFunction()" id="copy-button" value="copy" name="copy") copy
+      script.
+        function myFunction() {
+          let copyUrl = document.getElementById("url_input");
+          copyUrl.select();
+          copyUrl.setSelectionRange(0, 99999);
+          document.execCommand("copy");
+          alert("Copied the text: " + copyUrl.value); 
+        }
