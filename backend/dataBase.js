@@ -19,9 +19,11 @@ class DataBase {
     }
     static async addUrlToFile(reqBody) { 
         await this.readAllData();
-        // if(!isUrl(reqBody.url)) {
-        //     return null;
-        // }
+        if(!isUrl(reqBody.url)) {
+            console.log("ido")
+            return null;
+        }
+        console.log("leybo")
         for(let item of this.urls) {
             if(item.originalUrl === reqBody.url) {
                 return item.shortUrl;

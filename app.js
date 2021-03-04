@@ -30,10 +30,10 @@ app.get("/", (req, res) => {
 app.post('/api/shorturl', async (req, res) => {
   try {
   const itemId = await DataBase.addUrlToFile(req.body);
-  // if(itemId == null) { return res.status(400)}
+  if(itemId == null) { return res.sendStatus(400)}
   return res.status(201).render('printUrl', { 
-    message: 'Your new link:', 
-    id: `http://${req.get('Host')}/${itemId}`
+      message: 'Your new link:', 
+      id: `http://${req.get('Host')}/${itemId}`
   })
   } catch (err) {
     res.sendStatus(500)

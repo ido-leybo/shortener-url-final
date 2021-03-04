@@ -17,10 +17,10 @@ describe("POST rout", () => {
         const response = await request.post('/api/shorturl').type('form').send({url: 'https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url'})
         expect(response.status).toBe(201)
     })
-    // test("Illegal url", async () => {
-    //     const response = await request.post('/api/shorturl').type('form').send({url: 'htoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url'})
-    //     expect(response.status).toBe(400)
-    // })
+    test("URL illegal", async () => {
+        const response = await request.post('/api/shorturl').type('form').send({url: 'htoverflowpt-string-is-a-url'})
+        expect(response.status).toBe(400)
+    })
     test("Corrupted file in the dataBase", async () => {
         await fs.writeFile("./backend/test.json", "[");
         const response = await request.post('/api/shorturl').type('form').send({url:'https://www.youtube.com/?hl=iw&gl=IL'});
@@ -43,7 +43,7 @@ describe("Get routes by given ID", () => {
         expect(response.status).toBe(302)
     })
 
-    test("Check if ID legal", async () => {
+    test("ID illegal", async () => {
         const response = await request.get(`/asd`);
         expect(response.status).toBe(400)
     })
@@ -60,7 +60,6 @@ describe("Get routes by given ID", () => {
     });
 
 });
-
 
 describe("Get routes fot Statistic by given ID", () => {
     let fullUrlRequest = [{
