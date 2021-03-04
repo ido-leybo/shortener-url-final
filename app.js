@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 // Add new url 
 app.post('/api/shorturl', async (req, res) => {
   try {
-  const itemId = await DataBase.addUrlToFile(req.body);
+  const itemId = await DataBase.addUrlToFile(req.body.url);
   if(itemId == null) { return res.sendStatus(400)}
   return res.status(201).render('printUrl', { 
       message: 'Your new link:', 
@@ -37,7 +37,7 @@ app.get("/:id", async (req, res) => {
   }
   try {
     const itemUrl = await DataBase.getOriginalUrl(req.params.id)
-    if(itemUrl == null) { return res.sendStatus(404)}
+    if(itemUrl == null) { return res.status(404).send({message: "ID not found"})}
     res.redirect(itemUrl);
   } catch (err) {
     res.status(500).render('error', {status: 500, message: "we have a problem!"})

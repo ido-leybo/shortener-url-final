@@ -17,16 +17,16 @@ class DataBase {
           let parseData = JSON.parse(data);
           this.urls = parseData.links;
     }
-    static async addUrlToFile(reqBody) { 
+    static async addUrlToFile(url) { 
         await this.readAllData();
 
         // Check if url legal
-        if(!isUrl(reqBody.url)) {
+        if(!isUrl(url)) { // TODO change reqbody to url
             return null;
         }
         
         for(let item of this.urls) {
-            if(item.originalUrl === reqBody.url) {
+            if(item.originalUrl === url) {
                 return item.shortUrl;
             }
         }
@@ -34,7 +34,7 @@ class DataBase {
         let fullUrlRequest = {
             creationDate: this.getCurrentDate(new Date()),
             redirectCount: 0,
-            originalUrl: reqBody.url,
+            originalUrl: url,
             shortUrl: shortId.generate()  
         };
         this.urls.push(fullUrlRequest);
@@ -56,12 +56,19 @@ class DataBase {
     }
     static async getAllItemData(id) {
         await this.readAllData();
-        for(let item of this.urls) {
+        // const url = this.urls.find(url => url.id === url.shortUrl);
+        for(let url of this.urls) {
+            if (url == null) {
+                // throw new Error();
+                return null;
+            }
+        }
+        for(let item of this.urls) { // TODO: use array functions
             if(id === item.shortUrl) {
                 return item;
             }
         }
-        return null;
+        return null; //TODO: throw error in case of error
     }
     static getCurrentDate(date){
         return addZero(date.getDate()) + "/" + addZero(date.getMonth() + 1) + "/" + date.getFullYear();
