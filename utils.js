@@ -6,12 +6,9 @@ function addZero(number){
     else
         return number;
 }
-
 function getCurrentDate(date) {
 return addZero(date.getDate()) + "/" + addZero(date.getMonth() + 1) + "/" + date.getFullYear();
 }
-
-
 
 class Item {
     constructor(originalUrl) {
