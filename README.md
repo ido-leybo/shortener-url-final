@@ -8,8 +8,8 @@
 ![link page](./readme-files/linkPage.png)
 
 
-- Can watch the statistic of specipic URL adress:
-                                                  - The original URL adress
+- Can watch the statistic of specific URL address:
+                                                  - The original URL address
                                                   - The short URL 
                                                   - The time the short URL created
                                                   - The number of clicks on the short URL
