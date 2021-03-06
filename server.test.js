@@ -3,42 +3,43 @@ const app = require('./app')
 const supertest = require("supertest");
 const request = supertest(app);
 const fs = require("fs").promises;
-const dir = process.env.NODE_ENV === 'test' ? 'test.json' : 'bins.json';
+const file = process.env.NODE_ENV === 'test' ? 'test.json' : 'bins.json';
 
 
 
 beforeEach(async () => {
-    await fs.writeFile("./backend/test.json", JSON.stringify({"links":[]}));
+    await fs.writeFile(`./backend/test.json`, JSON.stringify([]));
 });
 
-describe("POST rout", () => {
+describe("POST route", () => {
 
     it("Should post new url item", async () => {
-        const response = await request.post('/api/shorturl').type('form').send({url: 'https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url'})
+        const response = await request.post('/api/shorturl').type('form').send({url: 'https://www.npmjs.com/package/puppeteer'})
         expect(response.status).toBe(201)
     })
     test("URL illegal", async () => {
         const response = await request.post('/api/shorturl').type('form').send({url: 'htoverflowpt-string-is-a-url'})
         expect(response.status).toBe(400)
+        expect(response.body.error).toEqual('url illegal')
     })
     test("Corrupted file in the dataBase", async () => {
-        await fs.writeFile("./backend/test.json", "[");
+        await fs.writeFile(`./backend/${file}`, "[");
         const response = await request.post('/api/shorturl').type('form').send({url:'https://www.youtube.com/?hl=iw&gl=IL'});
-        expect(response.status).toBe(500);
+        expect(response.status).toBe(500)
     });
 });
 
 describe("Get routes by given ID", () => {
-    let fullUrlRequest = [{
+    let fullUrlRequest = {
         creationDate: '04/03/2021',
         redirectCount: 0,
         originalUrl: 'https://www.youtube.com/?hl=iw&gl=IL',
         shortUrl: 'Abcd1324'  
-    }]
-    let json = JSON.stringify({"links": fullUrlRequest})
+    }
+    let json = JSON.stringify([fullUrlRequest])
     
     it("Should can get url by id", async () => {
-        await fs.writeFile(`./backend/${dir}`, json)
+        await fs.writeFile(`./backend/${file}`, json)
         const response = await request.get(`/Abcd1324`);
         expect(response.status).toBe(302)
     })
@@ -54,7 +55,7 @@ describe("Get routes by given ID", () => {
     })
 
     test("Corrupted file in the dataBase", async () => {
-        await fs.writeFile("./backend/test.json", "[");
+        await fs.writeFile(`./backend/${file}`, "[");
         const response = await request.get(`/Abcd1324`);
         expect(response.status).toBe(500);
     });
@@ -62,16 +63,16 @@ describe("Get routes by given ID", () => {
 });
 
 describe("Get routes fot Statistic by given ID", () => {
-    let fullUrlRequest = [{
+    let fullUrlRequest = {
         creationDate: '04/03/2021',
         redirectCount: 0,
         originalUrl: 'https://www.youtube.com/?hl=iw&gl=IL',
         shortUrl: 'Abcd1324'  
-    }]
-    let json = JSON.stringify({"links": fullUrlRequest})
+    }
+    let json = JSON.stringify([fullUrlRequest])
     
     it("Should can get url statistic by id", async () => {
-        await fs.writeFile(`./backend/${dir}`, json)
+        await fs.writeFile(`./backend/${file}`, json)
         const response = await request.get(`/api/statistic/Abcd1324`);
         expect(response.status).toBe(200)
     })
@@ -87,7 +88,7 @@ describe("Get routes fot Statistic by given ID", () => {
     })
 
     test("Corrupted file in the dataBase", async () => {
-        await fs.writeFile("./backend/test.json", "[");
+        await fs.writeFile(`./backend/${file}`, "[");
         const response = await request.get(`/api/statistic/Abcd1324`);
         expect(response.status).toBe(500);
     });

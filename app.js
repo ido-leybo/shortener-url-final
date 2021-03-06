@@ -3,7 +3,9 @@ const express = require("express");
 const cors = require("cors");;
 const app = express();
 const shortId = require("shortid");
-const DataBase = require('./backend/dataBase')
+const isUrl = require("is-valid-http-url");
+const dataBase = require('./backend/dataBase')
+const Item = require('./utils');
 
 
 app.set('view engine', 'pug')
@@ -19,14 +21,16 @@ app.get("/", (req, res) => {
 // Add new url 
 app.post('/api/shorturl', async (req, res) => {
   try {
-  const itemId = await DataBase.addUrlToFile(req.body.url);
-  if(itemId == null) { return res.sendStatus(400)}
-  return res.status(201).render('printUrl', { 
+    if(!isUrl(req.body.url)) { 
+      res.status(400).send({error: 'url illegal'})
+    } 
+    const itemId = await dataBase.addItem(req.body.url);
+    return res.status(201).render('printUrl', { 
       message: 'Your new link:', 
       id: `http://${req.get('Host')}/${itemId}`
-  })
+    })
   } catch (err) {
-    res.sendStatus(500)
+    res.status(500).render('error', {status: 500, message: `${err}`})
   }
 })
 
@@ -36,11 +40,13 @@ app.get("/:id", async (req, res) => {
     return res.status(400).render('error', {status: 400, message: "illegal id"})
   }
   try {
-    const itemUrl = await DataBase.getOriginalUrl(req.params.id)
-    if(itemUrl == null) { return res.status(404).send({message: "ID not found"})}
-    res.redirect(itemUrl);
+    const item = await dataBase.getItem(req.params.id, "website")
+    res.redirect(item.originalUrl);
   } catch (err) {
-    res.status(500).render('error', {status: 500, message: "we have a problem!"})
+    if(err == 'Error: item does not exists') {
+      return res.status(404).render('error', {status: 404, message: "ID not found"})
+    }
+    res.status(500).render('error', {status: 500, message: `${err}`})
   }
 });
 
@@ -50,17 +56,19 @@ app.get("/api/statistic/:id", async (req, res) => {
     return res.status(400).render('error', {status: 400, message: "illegal id"})
   }
   try {
-    const itemData = await DataBase.getAllItemData(req.params.id);
-    if(itemData == null) {return res.sendStatus(404)}
+    const item = await dataBase.getItem(req.params.id);
     res.status(200).render('statistic', { 
       title: 'Statistic', 
-      originalUrl: itemData.originalUrl, 
-      shortUrl: itemData.shortUrl, 
-      redirectCount: itemData.redirectCount, 
-      creationDate: itemData.creationDate 
+      originalUrl: item.originalUrl, 
+      shortUrl: item.shortUrl, 
+      redirectCount: item.redirectCount, 
+      creationDate: item.creationDate 
     })
   } catch (err) {
-    res.status(500).render('error', {status: 500, message: "we have a problem!"})
+    if(err == 'Error: item does not exists') {
+      return res.status(404).render('error', {status: 404, message: "ID not found"})
+    }
+    res.status(500).render('error', {status: 500, message: "Internal server error!"})
   }
 });
 
