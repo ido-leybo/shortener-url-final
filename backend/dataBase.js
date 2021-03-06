@@ -2,55 +2,8 @@ const Item = require('../utils');
 const fs = require("fs").promises;
 const file = process.env.NODE_ENV === 'test' ? 'test.json' : 'data.json';
 
-// class DataBase {
-//     static urls = [];
-    
-//     static async readAllData() {
-//         const data = await fs.readFile(`./backend/${dir}`, 'utf8' , (err, data) => {
-//             if (err) {
-//               console.error(err)
-//               return
-//             }
-//             console.log(data)
-//           })
-//           let parseData = JSON.parse(data);
-//           this.urls = parseData.links;
-//     }
-//     static async getOriginalUrl(id) {
-//         await this.readAllData();
-//         for(let item of this.urls) {
-//             if(id === item.shortUrl) {
-//                 item.redirectCount += 1;
-//                 let json = JSON.stringify({"links": this.urls})
-//                 fs.writeFile(`./backend/${dir}`, json)
-//                 return item.originalUrl;
-//             }
-//         }
-//         return null;  
-//     }
-//     static async getAllItemData(id) {
-//         await this.readAllData();
-//         // const url = this.urls.find(url => url.id === url.shortUrl);
-//         for(let url of this.urls) {
-//             if (url == null) {
-//                 // throw new Error();
-//                 return null;
-//             }
-//         }
-//         for(let item of this.urls) { // TODO: use array functions
-//             if(id === item.shortUrl) {
-//                 return item;
-//             }
-//         }
-//         return null; //TODO: throw error in case of error
-//     }
-// }
-
 class DataBase {
     items;
-
-    constructor() {
-    }
 
     async readFile() {
         const data = await fs.readFile(`./backend/${file}`, 'utf8');

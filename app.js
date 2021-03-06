@@ -41,7 +41,6 @@ app.get("/:id", async (req, res) => {
   }
   try {
     const item = await dataBase.getItem(req.params.id, "website")
-    console.log(item)
     res.redirect(item.originalUrl);
   } catch (err) {
     if(err == 'Error: item does not exists') {
