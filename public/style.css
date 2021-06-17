@@ -1,0 +1,77 @@
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #222;
+  background-color: rgb(216, 199, 123);
+  text-align: center;
+  line-height: 1.4em;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100vw;
+  height: 100vh;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  width: 100vw;
+  height: 100vh;
+}
+
+main {
+  padding: 0;
+  margin-top: 40px;
+}
+#url_input {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 40vw;
+}
+h3 {
+  margin-top: 30px;
+}
+footer {
+  margin-top: 30px;
+}
+#copy-button {
+  background-color: rgb(28, 121, 57);
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  width: 100px;
+  height: 40px;
+  border-radius: 50%;
+}
+#header {
+  background-color: rgb(34, 146, 72);
+  color: #fff;
+  width: 35vw;
+  height: 80px;
+  padding: 4px;
+  padding-top: 10px;
+  border-radius: 50%;
+}
+
+/* .user-stories li {
+  margin-bottom: 1em;
+} */
+
+a {
+  color: #2574a9;
+}
+
+form {
+  margin: 10px auto;
+  padding: 20px;
+  max-width: 600px;
+}
+
+label {
+  margin-right: 10px;
+}

@@ -1,0 +1,22 @@
+html
+  head
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+    link(rel="stylesheet" type="style/text" href="./public/style.css")
+    link(rel="icon" type="image/png" href="../public/favicon.ico") 
+    title= title
+  body(style="background: rgb(216, 199, 123)")
+    div(class="container")
+      h1 statistics
+      <table class="table table-striped table-responsive">
+            thead
+              tr(style="background: rgba(12, 100, 71, 0.5)")
+                th Full URL 
+                th Short URL
+                th clicks
+                th Created date
+            tbody(id="tbody")
+                  td= originalUrl
+                  td= shortUrl
+                  td= redirectCount
+                  td= creationDate
+      
